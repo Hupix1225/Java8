@@ -37,12 +37,12 @@ public class StreamTest {
                 .flatMap(house -> Arrays.stream(house.getAddress().split("#")))
                 .distinct()
                 .forEach(s -> System.out.println(s));*/
-        Integer reduce = ownerList.parallelStream()
+/*        Integer reduce = ownerList.parallelStream()
                 .flatMap(owner -> owner.getHouse().stream())
                 .peek(house -> System.out.println(house.getArea() + Thread.currentThread()))
                 .map(house -> Integer.valueOf(house.getArea()))
                 .reduce(0, (r, e) -> r + e);
-        System.out.println(reduce);
+        System.out.println(reduce);*/
 /*        Set<String> collect = ownerList.stream()
                 .flatMap(owner -> owner.getHouse().stream())
                 .map(house -> house.getAddress())
@@ -55,6 +55,11 @@ public class StreamTest {
         for(Map.Entry<Integer, List<House>> owner : set) {
             System.out.println(owner.getKey() +":"+ owner.getValue());
         }*/
+        ownerList.parallelStream()
+                .distinct()
+                .flatMap(owner -> owner.getHouse().stream())
+                .map(house -> Integer.valueOf(house.getArea()))
+                .forEach(integer -> System.out.println(integer));
     }
 
     public static List<Owner> getOwnerList() {
